@@ -1,0 +1,55 @@
+{
+  "name": "aitest-vitest",
+  "version": "0.1.0",
+  "private": true,
+  "description": "E2E framework with Playwright UI and Vitest API tests (converted from Postman)",
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write .",
+    "test:ui": "playwright test -c ui/playwright.config.ts",
+    "test:ui:headed": "PLAYWRIGHT_HEADFUL=1 playwright test -c ui/playwright.config.ts --headed",
+    "test:ui:smoke": "playwright test -c ui/playwright.config.ts -g @smoke",
+    "test:ui:ci": "playwright test -c ui/playwright.config.ts --reporter=line,junit,allure-playwright",
+    "test:api": "vitest run",
+    "test:api:watch": "vitest",
+    "report:allure:clean": "rm -rf allure-results allure-report",
+    "report:allure:open": "allure generate --clean && allure open",
+    "report:html": "playwright show-report",
+    "postinstall": "playwright install --with-deps",
+    "typecheck": "tsc -p tsconfig.json",
+    "ci:smoke": "npm run typecheck && npm run lint && npm run test:ui:smoke && npm run test:api",
+    "ci:full": "npm run typecheck && npm run lint && npm run test:ui:ci && npm run test:api"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "ajv": "^8.12.0",
+    "allure-commandline": "^2.29.0",
+    "allure-playwright": "^2.13.0",
+    "cross-fetch": "^3.1.5",
+    "eslint": "^9.0.0",
+    "husky": "^9.0.0",
+    "lint-staged": "^15.0.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0",
+    "zod": "^3.23.8"
+  },
+  "lint-staged": {
+    ".{ts,js,json,md,yml,yaml}": [
+      "prettier --write"
+    ],
+    "ui/**/.ts": [
+      "eslint --fix"
+    ],
+    "api/**/*.ts": [
+      "eslint --fix"
+    ]
+  },
+  "engines": {
+    "node": ">=18 <23"
+  }
+}

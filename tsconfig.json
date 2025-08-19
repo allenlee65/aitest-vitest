@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "types": ["node", "@playwright/test", "vitest/globals"]
+  },
+  "include": ["ui//*.ts", "api//.ts", "types/**/.d.ts", "performance/**/*.js"]
+}
