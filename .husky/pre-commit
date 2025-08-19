@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-Minimal, non-breaking hook: format + lint-staged (no legacy husky.sh includes)
-npx lint-staged
